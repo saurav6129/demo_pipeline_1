@@ -1,45 +1,40 @@
 pipeline {
 	
 	agent any
+	parameters {
+	
+		booleanParam(name: 'executeTest', defaultValue: 'true',description: '')
+	
+	}
 	
 	stages {
 		
 		stage("build") {
-			 when {
-				 expression{
-					BRANCH_NAME =='master' || BRANCH_NAME == 'test'
-				}
+			 
 			
 			 steps {
 			 	echo 'building the application...'
 			
 			 }
-		 }
-		 stage("test") {
-
-
-			 when {
-				 expression{
-					BRANCH_NAME =='test'
-				} 
+		}
+		stage("test") {
+			when {
+				expression {
+					params.executeTest
+				
+				}
 			}
+				
+			steps {
+				echo 'testing the application with parameters...'
+			 }
+		}
+		stage("deploy") {
 			
 			steps {
-				echo 'testing the application...'
-			 }
-		 }
-		 
-		stage("deploy") {
-			 when {
-				 expression{
-					BRANCH_NAME =='master' || BRANCH_NAME == 'test'
-				} 
-			}
-			
-			 steps {
 				echo 'deploying the application...'
 			 }
-		 }
-	 }
+		}
+	}
 
 }
