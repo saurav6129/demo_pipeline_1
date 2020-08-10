@@ -5,21 +5,21 @@ pipeline {
 	stages {
 		
 		stage("build") {
-			when {
-				expression{
+			 when {
+				 expression{
 					env.BRANCH_NAME =='master' || env.BRANCH_NAME == 'test'
 				}
 			
-			steps {
-				echo 'building the application...'
+			 steps {
+			 	echo 'building the application...'
 			
 			 }
 		 }
-		stage("test") {
+		 stage("test") {
 
 
-			when {
-				expression{
+			 when {
+				 expression{
 					env.BRANCH_NAME =='test'
 				} 
 			}
@@ -30,13 +30,13 @@ pipeline {
 		 }
 		 
 		stage("deploy") {
-			when {
-				expression{
+			 when {
+				 expression{
 					env.BRANCH_NAME =='master' || env.BRANCH_NAME == 'test'
 				} 
 			}
 			
-			steps {
+			 steps {
 				echo 'deploying the application...'
 			 }
 		 }
