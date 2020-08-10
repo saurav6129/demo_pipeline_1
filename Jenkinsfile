@@ -7,7 +7,7 @@ pipeline {
 		stage("build") {
 			 when {
 				 expression{
-					env.BRANCH_NAME =='master' || env.BRANCH_NAME == 'test'
+					BRANCH_NAME =='master' || BRANCH_NAME == 'test'
 				}
 			
 			 steps {
@@ -20,7 +20,7 @@ pipeline {
 
 			 when {
 				 expression{
-					env.BRANCH_NAME =='test'
+					BRANCH_NAME =='test'
 				} 
 			}
 			
@@ -32,7 +32,7 @@ pipeline {
 		stage("deploy") {
 			 when {
 				 expression{
-					env.BRANCH_NAME =='master' || env.BRANCH_NAME == 'test'
+					BRANCH_NAME =='master' || BRANCH_NAME == 'test'
 				} 
 			}
 			
